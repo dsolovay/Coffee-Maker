@@ -1,4 +1,4 @@
-﻿namespace CoffeeMaker
+﻿namespace CoffeeMachine
 {
 
   public enum WarmerPlateStatus
