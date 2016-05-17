@@ -20,17 +20,17 @@ namespace CoffeeMakerTests
 		[Fact]
 		public void StateMachine_Created_StateIsOff()
 		{
-			Assert.Equal(CoffeeMakerStateMachine.States.Off, this.StateMachine.CurrentState);
+			Assert.Equal(States.Off, this.StateMachine.CurrentState);
 		}
 
 		[Theory,
-			InlineData(CoffeeMakerStateMachine.States.Off, CoffeeMakerStateMachine.Actions.ButtonPushed, CoffeeMakerStateMachine.States.Brew),
-			InlineData(CoffeeMakerStateMachine.States.Brew, CoffeeMakerStateMachine.Actions.ButtonPushed, CoffeeMakerStateMachine.States.Brew),
-			InlineData(CoffeeMakerStateMachine.States.Brew, CoffeeMakerStateMachine.Actions.CaraffeRemoved, CoffeeMakerStateMachine.States.Pause),
-			InlineData(CoffeeMakerStateMachine.States.Brew, CoffeeMakerStateMachine.Actions.BoilerEmpty, CoffeeMakerStateMachine.States.Ready),
-			InlineData(CoffeeMakerStateMachine.States.Ready, CoffeeMakerStateMachine.Actions.CaraffeEmpty, CoffeeMakerStateMachine.States.Off) 
+			InlineData(States.Off, Events.ButtonPushed, States.Brew),
+			InlineData(States.Brew, Events.ButtonPushed, States.Brew),
+			InlineData(States.Brew, Events.PotRemoved, States.Pause),
+			InlineData(States.Brew, Events.BoilerEmpty, States.Ready),
+			InlineData(States.Ready, Events.PotEmpty, States.Off) 
 			]
-		public void StateMachine_ButtonPush_StateIsBrew(CoffeeMakerStateMachine.States startState, CoffeeMakerStateMachine.Actions action, CoffeeMakerStateMachine.States expectedState)
+		public void StateMachine_ButtonPush_StateIsBrew(States startState, Events action, States expectedState)
 		{
 			this.StateMachine.CurrentState = startState;
 

@@ -59,7 +59,9 @@
   <ItemGroup>
     <Compile Include="CoffeeMakerAPI.cs" />
     <Compile Include="CoffeeMakerStateMachine.cs" />
+    <Compile Include="Events.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="States.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

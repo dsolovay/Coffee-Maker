@@ -11,36 +11,16 @@ namespace CoffeeMachine
 		}
 		public States CurrentState { get; set; }
 
-		public enum Actions
-		{
-			ButtonPushed,
-			CaraffeRemoved,
-			CaraffePresent,
-			BoilerEmpty,
-			CaraffeEmpty
-		}
-
-		public enum States
-		{
-			Off,
-			Brew,
-			Pause,
-			Ready
-		}
-
 		private Dictionary<StateTransition, States> transitions = new Dictionary<StateTransition, States>
 		{
-			{new StateTransition(States.Off, Actions.ButtonPushed), States.Brew},
-			{new StateTransition(States.Brew, Actions.CaraffeRemoved), States.Pause},
-			{new StateTransition(States.Pause, Actions.CaraffePresent), States.Brew},
-			{new StateTransition(States.Brew, Actions.BoilerEmpty), States.Ready},
-			{new StateTransition(States.Ready, Actions.CaraffeEmpty), States.Off},
+			{new StateTransition(States.Off, Events.ButtonPushed), States.Brew},
+			{new StateTransition(States.Brew, Events.PotRemoved), States.Pause},
+			{new StateTransition(States.Pause, Events.PotPresent), States.Brew},
+			{new StateTransition(States.Brew, Events.BoilerEmpty), States.Ready},
+			{new StateTransition(States.Ready, Events.PotEmpty), States.Off},
 		};
 
-
-		 
-
-		public void DoAction(Actions action)
+		public void DoAction(Events action)
 		{
 			var t = new StateTransition(this.CurrentState, action);
 			if (transitions.ContainsKey(t))
@@ -50,18 +30,18 @@ namespace CoffeeMachine
 		}
 
 		public class StateTransition { 
-			private readonly States _s;
-			private readonly Actions _a;
+			private readonly States _state;
+			private readonly Events _event;
 
-			public StateTransition(States s, Actions a)
+			public StateTransition(States state, Events @event)
 			{
-				_s = s;
-				_a = a;
+				_state = state;
+				_event = @event;
 			}
 
 			protected bool Equals(StateTransition other)
 			{
-				return _s == other._s && _a == other._a;
+				return _state == other._state && _event == other._event;
 			}
 
 			public override bool Equals(object obj)
@@ -77,7 +57,7 @@ namespace CoffeeMachine
 			{
 				unchecked
 				{
-					return ((int) _s*397) ^ (int) _a;
+					return ((int) _state*397) ^ (int) _event;
 				}
 			}
 		}
@@ -85,6 +65,6 @@ namespace CoffeeMachine
 
 	public interface IActionReceiver
 	{
-		void DoAction(CoffeeMakerStateMachine.Actions action);
+		void DoAction(Events action);
 	}
 }

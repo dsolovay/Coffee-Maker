@@ -29,7 +29,7 @@ namespace CoffeeMakerTests
 
 			_coffeeMaker.ProcessSensors();
 
-			_receiver.Received().DoAction(CoffeeMakerStateMachine.Actions.ButtonPushed);
+			_receiver.Received().DoAction(Events.ButtonPushed);
 
 		}
 
@@ -40,7 +40,7 @@ namespace CoffeeMakerTests
 
 			_coffeeMaker.ProcessSensors();
 
-			_receiver.Received().DoAction(CoffeeMakerStateMachine.Actions.CaraffeRemoved);
+			_receiver.Received().DoAction(Events.PotRemoved);
 
 		}
 	}
@@ -63,12 +63,12 @@ namespace CoffeeMakerTests
 			WarmerPlateStatus warmerPlateStatus = _sensors.GetCaraffeStatus;
 
 			if (brewButtonStatus == BrewButtonStatus.PUSHED)
-				_receiver.DoAction(CoffeeMakerStateMachine.Actions.ButtonPushed);
+				_receiver.DoAction(Events.ButtonPushed);
 
 			switch (warmerPlateStatus)
 			{
 				case WarmerPlateStatus.WARMER_EMPTY:
-					_receiver.DoAction(CoffeeMakerStateMachine.Actions.CaraffeRemoved);
+					_receiver.DoAction(Events.PotRemoved);
 					break;
 				case WarmerPlateStatus.POT_EMPTY:
 					break;
