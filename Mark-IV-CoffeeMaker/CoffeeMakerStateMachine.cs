@@ -1,9 +1,10 @@
 using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
+using CoffeeMaker.Enumerations;
 
 namespace CoffeeMachine
 {
-	public class CoffeeMakerStateMachine:IActionReceiver
+	public class CoffeeMakerStateMachine:IEventReceiver
 	{
 		public CoffeeMakerStateMachine()
 		{
@@ -20,7 +21,7 @@ namespace CoffeeMachine
 			{new StateTransition(States.Ready, Events.PotEmpty), States.Off},
 		};
 
-		public void DoAction(Events action)
+		public void SendEvent(Events action)
 		{
 			var t = new StateTransition(this.CurrentState, action);
 			if (transitions.ContainsKey(t))
@@ -63,8 +64,8 @@ namespace CoffeeMachine
 		}
 	}
 
-	public interface IActionReceiver
+	public interface IEventReceiver
 	{
-		void DoAction(Events action);
+		void SendEvent(Events action);
 	}
 }

@@ -1,4 +1,4 @@
-namespace CoffeeMachine
+namespace CoffeeMaker.Enumerations
 {
 	public enum States
 	{

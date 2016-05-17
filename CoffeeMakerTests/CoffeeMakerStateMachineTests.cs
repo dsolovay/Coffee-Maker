@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CoffeeMachine;
+using CoffeeMaker.Enumerations;
 using Xunit;
 
 namespace CoffeeMakerTests
@@ -34,7 +35,7 @@ namespace CoffeeMakerTests
 		{
 			this.StateMachine.CurrentState = startState;
 
-			this.StateMachine.DoAction(action);
+			this.StateMachine.SendEvent(action);
 
 			Assert.Equal(expectedState, this.StateMachine.CurrentState);
 		}
