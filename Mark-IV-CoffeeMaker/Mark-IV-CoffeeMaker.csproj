@@ -57,6 +57,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ControlUpdater.cs" />
     <Compile Include="Interfaces\IApiAdapter.cs" />
     <Compile Include="Interfaces\CoffeeMakerAPI.cs" />
     <Compile Include="CoffeeMakerStateMachine.cs" />
@@ -66,6 +67,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Interfaces\ISensors.cs" />
     <Compile Include="Enumerations\States.cs" />
+    <Compile Include="StateUpdater.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

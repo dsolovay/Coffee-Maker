@@ -61,8 +61,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CoffeeMachineTests.cs" />
     <Compile Include="CoffeeMakerStateMachineTests.cs" />
+    <Compile Include="ControlUpdaterTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StateUpdaterTests.cs" />
   </ItemGroup>

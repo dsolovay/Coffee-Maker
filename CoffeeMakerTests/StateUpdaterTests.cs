@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CoffeeMachine;
+using CoffeeMaker;
 using CoffeeMaker.Interfaces;
 using NSubstitute;
 using Xunit;
@@ -12,9 +12,9 @@ namespace CoffeeMakerTests
 {
 	public class StateUpdaterTests
 	{
-		private IUpdater _sut;
-		ISensors _sensors;
-		IEventReceiver _eventReceiver;
+		private readonly IUpdater _sut;
+		readonly ISensors _sensors;
+		readonly IEventReceiver _eventReceiver;
 
 		public StateUpdaterTests()
 		{
@@ -26,48 +26,62 @@ namespace CoffeeMakerTests
 		[Fact]
 		public void StateUpdater_ButtonPushed_Sends()
 		{
-			_sensors.GetBrewButtonStatus.Returns(BrewButtonStatus.PUSHED);
+			_sensors.GetBrewButtonStatus().Returns(BrewButtonStatus.PUSHED);
 
 			_sut.DoUpdate();
 
-			_eventReceiver.Received().DoAction(Events.ButtonPushed);
+			_eventReceiver.Received().SendEvent(Events.ButtonPushed);
 		}
 
 		[Fact]
 		public void StateUpdater_ButtonNotPushed_DoesNotSend()
 		{
-			_sensors.GetBrewButtonStatus.Returns(BrewButtonStatus.NOT_PUSHED);
+			_sensors.GetBrewButtonStatus().Returns(BrewButtonStatus.NOT_PUSHED);
 
 			_sut.DoUpdate();
 
-			_eventReceiver.DidNotReceive().DoAction(Events.ButtonPushed);
+			_eventReceiver.DidNotReceive().SendEvent(Events.ButtonPushed);
 		}
 
 		[Fact]
-		public void StateUpdater_CaraffeOff_Sends()
+		public void StateUpdater_PotEmpty_Sends()
 		{
-			_sensors.GetCaraffeStatus.Returns(WarmerPlateStatus.POT_EMPTY)
-		}
-	}
+			_sensors.GetWarmerPlateStatus().Returns(WarmerPlateStatus.POT_EMPTY);
 
-	internal class StateUpdater : IUpdater
-	{
-		private readonly ISensors _sensors;
-		private readonly IEventReceiver _eventReceiver;
+			_sut.DoUpdate();
 
-		public StateUpdater(ISensors sensors, IEventReceiver eventReceiver)
-		{
-			_sensors = sensors;
-			_eventReceiver = eventReceiver;
+			_eventReceiver.Received().SendEvent(Events.PotEmpty);
+
 		}
 
-		public void DoUpdate()
+		[Fact]
+		public void StateUpdater_PotPresent_Sends()
 		{
-			if (_sensors.GetBrewButtonStatus == BrewButtonStatus.PUSHED)
-			{
-				_eventReceiver.DoAction(Events.ButtonPushed);
-			}
+			_sensors.GetWarmerPlateStatus().Returns(WarmerPlateStatus.POT_NOT_EMPTY);
 
+			_sut.DoUpdate();
+
+			_eventReceiver.Received().SendEvent(Events.PotPresent);
+		}
+
+		[Fact]
+		public void StateUpdater_PotRemoved_Sends()
+		{
+			_sensors.GetWarmerPlateStatus().Returns(WarmerPlateStatus.WARMER_EMPTY);
+
+			_sut.DoUpdate();
+
+			_eventReceiver.Received().SendEvent(Events.PotRemoved);
+		}
+
+		[Fact]
+		public void StateUpdater_BoilerEmpty_Sends()
+		{
+			_sensors.GetBoilerStatus().Returns(BoilerStatus.EMPTY);
+
+			_sut.DoUpdate();
+
+			_eventReceiver.Received().SendEvent(Events.BoilerEmpty);
 		}
 	}
 }

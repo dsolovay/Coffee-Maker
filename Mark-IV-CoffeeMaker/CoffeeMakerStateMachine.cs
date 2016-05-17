@@ -4,7 +4,7 @@ using CoffeeMaker.Enumerations;
 
 namespace CoffeeMachine
 {
-	public class CoffeeMakerStateMachine:IEventReceiver
+	public class CoffeeMakerStateMachine:IEventReceiver,IStateProvider
 	{
 		public CoffeeMakerStateMachine()
 		{
@@ -62,6 +62,11 @@ namespace CoffeeMachine
 				}
 			}
 		}
+	}
+
+	public interface IStateProvider
+	{
+		States CurrentState { get; }
 	}
 
 	public interface IEventReceiver
