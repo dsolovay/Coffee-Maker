@@ -12,7 +12,7 @@ namespace CoffeeMakerHarness
 		{
 			while (true)
 			{
-				Console.WriteLine("(F)ill Resevoir, Press (B)utton, (R)emove Pot, (P)lace Pot, (E)mpty Pot, E(X)it");
+				Console.WriteLine("(F)ill Reservoir, E(M)pty Reservoir, Press (B)utton, (R)emove Pot, (P)lace Pot, (E)mpty Pot, E(X)it:");
 
 				string line = Console.ReadLine();
 
