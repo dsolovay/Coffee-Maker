@@ -2,7 +2,7 @@ using System;
 using CoffeeMachine;
 using CoffeeMaker.Interfaces;
 
-namespace CoffeeMaker
+namespace CoffeeMaker.Classes
 {
 	public class StateUpdater : IUpdater
 	{

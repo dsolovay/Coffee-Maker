@@ -1,12 +1,13 @@
 using System.Collections.Generic;
-using System.Security.Cryptography.X509Certificates;
+using CoffeeMachine;
 using CoffeeMaker.Enumerations;
+using CoffeeMaker.Interfaces;
 
-namespace CoffeeMachine
+namespace CoffeeMaker.Classes
 {
-	public class CoffeeMakerStateMachine:IEventReceiver,IStateProvider
+	public class StateMachine:IEventReceiver,IStateProvider
 	{
-		public CoffeeMakerStateMachine()
+		public StateMachine()
 		{
 			CurrentState = States.Off;
 		}
@@ -62,15 +63,5 @@ namespace CoffeeMachine
 				}
 			}
 		}
-	}
-
-	public interface IStateProvider
-	{
-		States CurrentState { get; }
-	}
-
-	public interface IEventReceiver
-	{
-		void SendEvent(Events action);
 	}
 }

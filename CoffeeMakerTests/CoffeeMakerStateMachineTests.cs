@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CoffeeMachine;
+using CoffeeMaker.Classes;
 using CoffeeMaker.Enumerations;
 using Xunit;
 
@@ -13,10 +14,10 @@ namespace CoffeeMakerTests
 	{
 		public CoffeeMakerStateMachineTests()
 		{
-			this.StateMachine = new CoffeeMakerStateMachine();
+			this.StateMachine = new StateMachine();
 		}
 
-		public CoffeeMakerStateMachine StateMachine { get; set; }
+		public StateMachine StateMachine { get; set; }
 
 		[Fact]
 		public void StateMachine_Created_StateIsOff()

@@ -4,6 +4,7 @@ using System.Text;
 using System.Threading.Tasks;
 using CoffeeMachine;
 using CoffeeMaker;
+using CoffeeMaker.Classes;
 using CoffeeMaker.Interfaces;
 using NSubstitute;
 using Xunit;

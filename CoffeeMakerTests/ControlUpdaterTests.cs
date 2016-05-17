@@ -1,5 +1,6 @@
 using CoffeeMachine;
 using CoffeeMaker;
+using CoffeeMaker.Classes;
 using CoffeeMaker.Enumerations;
 using CoffeeMaker.Interfaces;
 using NSubstitute;

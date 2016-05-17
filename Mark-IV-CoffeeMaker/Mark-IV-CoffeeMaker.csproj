@@ -57,17 +57,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ControlUpdater.cs" />
+    <Compile Include="Classes\CompositeUpdater.cs" />
+    <Compile Include="Classes\ControlUpdater.cs" />
+    <Compile Include="Classes\StateMachine.cs" />
+    <Compile Include="Classes\StateUpdater.cs" />
     <Compile Include="Interfaces\IApiAdapter.cs" />
     <Compile Include="Interfaces\CoffeeMakerAPI.cs" />
-    <Compile Include="CoffeeMakerStateMachine.cs" />
+    <Compile Include="Interfaces\IEventReceiver.cs" />
+    <Compile Include="Interfaces\IStateProvider.cs" />
     <Compile Include="Interfaces\IControls.cs" />
     <Compile Include="Enumerations\Events.cs" />
     <Compile Include="Interfaces\IUpdater.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Interfaces\ISensors.cs" />
     <Compile Include="Enumerations\States.cs" />
-    <Compile Include="StateUpdater.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

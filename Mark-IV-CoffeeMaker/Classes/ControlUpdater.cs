@@ -3,7 +3,7 @@ using CoffeeMachine;
 using CoffeeMaker.Enumerations;
 using CoffeeMaker.Interfaces;
 
-namespace CoffeeMaker
+namespace CoffeeMaker.Classes
 {
 	public class ControlUpdater : IUpdater
 	{
