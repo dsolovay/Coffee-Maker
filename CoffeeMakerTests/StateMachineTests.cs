@@ -20,9 +20,9 @@ namespace CoffeeMakerTests
 		public StateMachine StateMachine { get; set; }
 
 		[Fact]
-		public void StateMachine_Created_StateIsOff()
+		public void StateMachine_Created_StateIsEmpty()
 		{
-			Assert.Equal(States.Off, this.StateMachine.CurrentState);
+			Assert.Equal(States.Empty, this.StateMachine.CurrentState);
 		}
 
 		[Theory,
@@ -35,11 +35,11 @@ namespace CoffeeMakerTests
 			InlineData(States.Brew, Events.BoilerEmpty, States.Ready),
 			InlineData(States.Ready, Events.PotEmpty, States.Empty) 
 			]
-		public void StateMachine_ButtonPush_StateIsBrew(States startState, Events action, States expectedState)
+		public void StateMachine_ButtonPush_StateIsBrew(States startState, Events theEvent, States expectedState)
 		{
 			this.StateMachine.CurrentState = startState;
 
-			this.StateMachine.SendEvent(action);
+			this.StateMachine.HandleEvent(theEvent);
 
 			Assert.Equal(expectedState, this.StateMachine.CurrentState);
 		}

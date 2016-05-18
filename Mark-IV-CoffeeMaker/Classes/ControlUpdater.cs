@@ -25,6 +25,7 @@ namespace CoffeeMaker.Classes
 			switch (currentState)
 			{
 				case States.Off:
+				case States.Empty:
 					_controls.SetIndicatorState(IndicatorState.OFF);
 					_controls.SetBoilerState(BoilerState.OFF);
 					_controls.SetReliefValveState(ReliefValveState.CLOSED);

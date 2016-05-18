@@ -31,7 +31,7 @@ namespace CoffeeMakerTests
 
 			_sut.DoUpdate();
 
-			_eventReceiver.Received().SendEvent(Events.ButtonPushed);
+			_eventReceiver.Received().HandleEvent(Events.ButtonPushed);
 		}
 
 		[Fact]
@@ -41,7 +41,7 @@ namespace CoffeeMakerTests
 
 			_sut.DoUpdate();
 
-			_eventReceiver.DidNotReceive().SendEvent(Events.ButtonPushed);
+			_eventReceiver.DidNotReceive().HandleEvent(Events.ButtonPushed);
 		}
 
 		[Fact]
@@ -51,7 +51,7 @@ namespace CoffeeMakerTests
 
 			_sut.DoUpdate();
 
-			_eventReceiver.Received().SendEvent(Events.PotEmpty);
+			_eventReceiver.Received().HandleEvent(Events.PotEmpty);
 
 		}
 
@@ -62,7 +62,7 @@ namespace CoffeeMakerTests
 
 			_sut.DoUpdate();
 
-			_eventReceiver.Received().SendEvent(Events.PotPresent);
+			_eventReceiver.Received().HandleEvent(Events.PotPresent);
 		}
 
 		[Fact]
@@ -72,7 +72,7 @@ namespace CoffeeMakerTests
 
 			_sut.DoUpdate();
 
-			_eventReceiver.Received().SendEvent(Events.PotRemoved);
+			_eventReceiver.Received().HandleEvent(Events.PotRemoved);
 		}
 
 		[Fact]
@@ -82,7 +82,19 @@ namespace CoffeeMakerTests
 
 			_sut.DoUpdate();
 
-			_eventReceiver.Received().SendEvent(Events.BoilerEmpty);
+			_eventReceiver.Received().HandleEvent(Events.BoilerEmpty);
 		}
+
+		[Fact]
+		public void StateUpdater_BoilerNotEmpty_Sends()
+		{
+			_sensors.GetBoilerStatus().Returns(BoilerStatus.NOT_EMPTY);
+
+			_sut.DoUpdate();
+
+			_eventReceiver.Received().HandleEvent(Events.BoilerNotEmpty);
+		}
+
+
 	}
 }

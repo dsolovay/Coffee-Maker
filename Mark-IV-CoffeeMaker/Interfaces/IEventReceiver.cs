@@ -4,6 +4,6 @@ namespace CoffeeMaker.Interfaces
 {
 	public interface IEventReceiver
 	{
-		void SendEvent(Events action);
+		void HandleEvent(Events theEvent);
 	}
 }

@@ -19,27 +19,34 @@ namespace CoffeeMaker.Classes
 		{
 			if (_sensors.GetBrewButtonStatus() == BrewButtonStatus.PUSHED)
 			{
-				_eventReceiver.SendEvent(Events.ButtonPushed);
+				_eventReceiver.HandleEvent(Events.ButtonPushed);
 			}
 
 			switch (_sensors.GetWarmerPlateStatus())
 			{
 				case WarmerPlateStatus.POT_EMPTY:
-					_eventReceiver.SendEvent(Events.PotEmpty);
+					_eventReceiver.HandleEvent(Events.PotEmpty);
 					break;
 				case WarmerPlateStatus.POT_NOT_EMPTY:
-					_eventReceiver.SendEvent(Events.PotPresent);
+					_eventReceiver.HandleEvent(Events.PotPresent);
 					break;
 				case WarmerPlateStatus.WARMER_EMPTY:
-					_eventReceiver.SendEvent(Events.PotRemoved);
+					_eventReceiver.HandleEvent(Events.PotRemoved);
 					break;
 				default:
 					throw new ArgumentOutOfRangeException();
 			}
 
-			if (_sensors.GetBoilerStatus() == BoilerStatus.EMPTY)
+			switch (_sensors.GetBoilerStatus())
 			{
-				_eventReceiver.SendEvent(Events.BoilerEmpty);
+				case BoilerStatus.EMPTY:
+					_eventReceiver.HandleEvent(Events.BoilerEmpty);
+					break;
+				case BoilerStatus.NOT_EMPTY:
+					_eventReceiver.HandleEvent(Events.BoilerNotEmpty);
+					break;
+				default:
+					throw new ArgumentOutOfRangeException();
 			}
 		}
 	}

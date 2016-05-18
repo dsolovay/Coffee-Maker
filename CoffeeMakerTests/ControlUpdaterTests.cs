@@ -180,5 +180,47 @@ namespace CoffeeMakerTests
 
 			_controls.Received().SetWarmerState(WarmerState.ON);
 		}
+
+		[Fact]
+		public void CoffeeUpdater_Empty_SetsIndictorOff()
+		{
+			_stateProvider.CurrentState.Returns(States.Empty);
+
+			_sut.DoUpdate();
+
+			_controls.Received().SetIndicatorState(IndicatorState.OFF);
+		}
+
+		[Fact]
+		public void CoffeeUpdater_Empty_SetsBoilerOff()
+		{
+			_stateProvider.CurrentState.Returns(States.Empty);
+
+			_sut.DoUpdate();
+
+			_controls.Received().SetBoilerState(BoilerState.OFF);
+		}
+
+		[Fact]
+		public void CoffeeUpdater_Empty_SetValveClosed()
+		{
+			_stateProvider.CurrentState.Returns(States.Empty);
+
+			_sut.DoUpdate();
+
+			_controls.Received().SetReliefValveState(ReliefValveState.CLOSED);
+		}
+
+		[Fact]
+		public void CoffeeUpdater_Empty_SetWarmerOff()
+		{
+			_stateProvider.CurrentState.Returns(States.Empty);
+
+			_sut.DoUpdate();
+
+			_controls.Received().SetWarmerState(WarmerState.OFF);
+		}
+
+
 	}
 }

@@ -9,7 +9,7 @@ namespace CoffeeMaker.Classes
 	{
 		public StateMachine()
 		{
-			CurrentState = States.Off;
+			CurrentState = States.Empty;
 		}
 		public States CurrentState { get; set; }
 
@@ -23,9 +23,9 @@ namespace CoffeeMaker.Classes
 			{new StateTransition(States.Ready, Events.PotEmpty), States.Empty},
 		};
 
-		public void SendEvent(Events action)
+		public void HandleEvent(Events theEvent)
 		{
-			var t = new StateTransition(this.CurrentState, action);
+			var t = new StateTransition(this.CurrentState, theEvent);
 			if (transitions.ContainsKey(t))
 			{
 				CurrentState = transitions[t];
