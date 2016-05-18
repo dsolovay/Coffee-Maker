@@ -27,7 +27,7 @@ namespace CoffeeMakerTests
 
 		[Theory,
 			InlineData(States.Empty, Events.ButtonPushed, States.Empty),
-			InlineData(States.Empty, Events.BoilerFilled, States.Off),
+			InlineData(States.Empty, Events.BoilerNotEmpty, States.Off),
 			InlineData(States.Off, Events.ButtonPushed, States.Brew),
 			InlineData(States.Brew, Events.ButtonPushed, States.Brew),
 			InlineData(States.Brew, Events.PotRemoved, States.Pause),

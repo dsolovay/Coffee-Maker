@@ -5,7 +5,8 @@ namespace CoffeeMachine
 		ButtonPushed,
 		PotRemoved,
 		PotPresent,
+		PotEmpty,
 		BoilerEmpty,
-		PotEmpty
+		BoilerNotEmpty
 	}
 }

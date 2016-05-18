@@ -5,6 +5,7 @@ namespace CoffeeMaker.Enumerations
 		Off,
 		Brew,
 		Pause,
-		Ready
+		Ready,
+		Empty
 	}
 }
