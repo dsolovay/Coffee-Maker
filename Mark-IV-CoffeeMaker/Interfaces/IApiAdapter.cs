@@ -2,7 +2,7 @@
 
 namespace CoffeeMaker.Interfaces
 {
-	interface IApiAdapter:CoffeeMakerAPI, ISensors, IControls
+	public interface IApiAdapter:CoffeeMakerAPI, ISensors, IControls
 	{
 	}
 }
