@@ -10,9 +10,9 @@ using Xunit;
 
 namespace CoffeeMakerTests
 {
-	public class CoffeeMakerStateMachineTests
+	public class StateMachineTests
 	{
-		public CoffeeMakerStateMachineTests()
+		public StateMachineTests()
 		{
 			this.StateMachine = new StateMachine();
 		}
@@ -26,11 +26,14 @@ namespace CoffeeMakerTests
 		}
 
 		[Theory,
+			InlineData(States.Empty, Events.ButtonPushed, States.Empty),
+			InlineData(States.Empty, Events.BoilerFilled, States.Off),
 			InlineData(States.Off, Events.ButtonPushed, States.Brew),
 			InlineData(States.Brew, Events.ButtonPushed, States.Brew),
 			InlineData(States.Brew, Events.PotRemoved, States.Pause),
+			InlineData(States.Pause, Events.PotPresent, States.Brew),
 			InlineData(States.Brew, Events.BoilerEmpty, States.Ready),
-			InlineData(States.Ready, Events.PotEmpty, States.Off) 
+			InlineData(States.Ready, Events.PotEmpty, States.Empty) 
 			]
 		public void StateMachine_ButtonPush_StateIsBrew(States startState, Events action, States expectedState)
 		{
@@ -40,5 +43,7 @@ namespace CoffeeMakerTests
 
 			Assert.Equal(expectedState, this.StateMachine.CurrentState);
 		}
+
+	 
 	}
 }
